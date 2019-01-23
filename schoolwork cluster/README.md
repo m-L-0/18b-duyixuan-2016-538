@@ -53,7 +53,7 @@ plt.plot()
 
 
 ```python
-#构建邻接矩阵
+#构建G矩阵
 def get_graph(csv_filename):
     import networkx as nx
 
@@ -64,6 +64,23 @@ def get_graph(csv_filename):
 
     G = nx.from_numpy_matrix(np.matrix(M))
     return np.array(M), G
+#构建相似度矩阵
+from sklearn import datasets
+iris = datasets.load_iris()
+features = iris.data
+A =[]
+n=150
+
+def grapha(features):
+    n=150
+    A =[]
+    for i in features:
+        for j in features:
+            distance = np.abs(i[0]-j[0])+np.abs(i[1]-j[1])+np.abs(i[2]-j[2])+np.abs(i[3]-j[3])  
+            A.append(float(distance))  
+    A = np.array(A)
+    A = s_array.reshape(n,n) 
+    return A
 #inflation矩阵
 def inflate(A, inflate_factor):
     return normalize(np.power(A, inflate_factor))
